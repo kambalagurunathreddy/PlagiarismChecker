@@ -28,27 +28,13 @@ def getPlagiarismPercent3(file1,file2,n=4,unit=0): #using Type1 FingerPrinting
         print("Plagiarism Percentage : ",0)
         print("As one of the files is empty")
         return None
-    nGrams1=(nGramGenerator(file1Contents,n=n,unit=unit)) #creating n-Grams
-    nGrams2=(nGramGenerator(file2Contents,n=n,unit=unit)) #creating n-Grams
-    print("Init ",len(nGrams1),len(nGrams1))
-    #print("nGrams1 : ",nGrams1)
-    #print("nGrams2 : ",nGrams2)
-    """Generating Fingerprints Start"""
-    
-    hashes1=list(i.genHash(n) for i in nGrams1)
-    hashes2=list(i.genHash(n) for i in nGrams2)
-    FingerPrint1=generateFingerprint(hashes1)
-    FingerPrint2=generateFingerprint(hashes2)
-    FingerPrint1=hashes1
-    FingerPrint2=hashes1
-    
-    print("FingerPrint1 : ",FingerPrint1)
-    print("FingerPrint2 : ",FingerPrint2)
-    print("hashit ",len(FingerPrint1),len(FingerPrint2))
-    """Generating Fingerprints Stop"""
-    commonNgrams=intersect(FingerPrint1,FingerPrint2)
+    nGrams1=returnList(nGramGenerator(file1Contents,n=n,unit=unit)) #creating n-Grams
+    nGrams2=returnList(nGramGenerator(file2Contents,n=n,unit=unit)) #creating n-Grams
+    print("nGrams1 : ",nGrams1)
+    print("nGrams2 : ",nGrams2)
+    commonNgrams=intersect(nGrams1,nGrams2)
     print(commonNgrams)
-    pPercent=((len(commonNgrams)*2)/(len(FingerPrint1)+len(FingerPrint2)))*100
+    pPercent=((len(commonNgrams)*2)/(len(nGrams1)+len(nGrams2)))*100
     print("Plagiarism Percentage : ",pPercent)
     return pPercent
   
